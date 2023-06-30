@@ -1,17 +1,26 @@
 const express=require('express');
-// const randomBytes = require('crypto');
-// const body-Parsor =require('body-parsor');
-const app = express();
-// app.use('body-parsor');
+const bodyParser=require('body-parser');
 
+const app = express();
+//app.use(bodyParser.json());
+
+const cat={};
 
 app.get('/jobcategories',(req,res)=>{
-    res.send(req.body)
+    
+    res.send(req.body);
 
 });
 
 app.post('/jobcategories',(req,res)=> {
-    res.status(201).send("my hello")
+    // res.status(201).send("my hello")
+    const id=123;
+    const {category}= req.body;
+    cat[id]={
+        id,
+        category
+    };
+    res.status(201).send(cat[id]);
 });
 
 app.listen(4000,() => {
