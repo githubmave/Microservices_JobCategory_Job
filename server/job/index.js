@@ -1,9 +1,11 @@
 const express = require('express');
+const {randomBytes}=require('crypto');
+
 const app= express();
 const bodyParser=require('body-parser');
 app.use(bodyParser.json());
 
-jobcategories={};
+jobByCategoryId={};
 
 app.get('/jobcategories/:id/job',(req,res)=>{
     res.send(req.body)
@@ -11,16 +13,18 @@ app.get('/jobcategories/:id/job',(req,res)=>{
 
 app.post('/jobcategories/:id/job',(req,res) =>{
 
-    const id=234;
-
-    const content = req.body.content;
+    const jobId=randomBytes(4).toString('hex');
     
-    jobcategories[id] ={
-        id:234,
-        content   
-    };
+    const jobList=jobByCategoryId[req.params.id];
+    const {jobContent}=req.body;
+    
+   // console.log(req.param.id);
+//
 
-    res.status(201).send(jobcategories[id]);
+    
+   
+
+    res.status(201).send("hello Bernie");
 });
 
 app.listen(4001,()=>{
